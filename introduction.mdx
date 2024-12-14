@@ -1,71 +1,155 @@
----
-title: Introduction
-description: 'Welcome to the home of your new documentation'
----
+###
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+Dexter is a comprehensive synthetic client designed to scrape various social media platforms for user data and interlinking data, enabling the construction of synthetic user models. This crate provides a robust set of tools and modules to facilitate data collection, parsing, and analysis.
 
-## Setting up
+### Overview
 
-The first step to world-class documentation is setting up your editing environments.
+Dexter aims to streamline the process of gathering and managing social media data. It supports multiple social media platforms and offers a unified interface for interacting with them. The crate is modular, allowing users to pick and choose the components they need for their specific use case.
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+### Modules
 
-## Make it yours
+* **api**: Contains the API endpoints for Dexter.
 
-Update your docs to your brand and add valuable content for the best user conversion.
+* **builder**: Provides utilities for building requests and other components.
 
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+* **data**: Manages data structures and storage.
+
+* **monitoring**: Includes tools for monitoring and error reporting.
+
+* **parser**: Offers utilities for parsing and handling data, including URL handling and regex pattern matching.
+
+* **providers**: Defines and implements various social media providers.
+
+* **proxy**: Manages proxy settings and configurations.
+
+* **request**: Handles the construction and execution of HTTP requests.
+
+* **user**: Manages user-related data and operations.
+
+* **utils**: Provides utility functions and helpers.
+
+* **uuid**: Handles UUID generation and management.
+
+* **username\_availability**: Checks the availability of usernames across different platforms.
+
+* **connections**: Manages connections and relationships between users.
+
+* **returns**: Defines return types and error handling mechanisms.
+
+### Usage
+
+Dexter can be used to create clients and users, scrape data from various social media platforms, and analyze the collected data. Below are some of the primary structures and their usage.
+
+#### [`DexterClient`](https://dexterlabs.cfd/docs/dexter_scraping/struct.DexterClient.html)
+
+The `DexterClient` struct is used to create a new client for Dexter
+
+```rust
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct DexterClient {
+    pub username: String,
+    pub provider: Provider,
+}
+```
+
+### `DexterUser`
+
+The `DexterUser` struct is used to create a new user in the database. It includes various fields for storing user data and social media usernames.
+
+```rust
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct DexterUser {
+    pub user_id: String,
+    pub username: String,
+    pub username_instagram: Option<String>,
+    pub username_snapchat: Option<String>,
+    pub username_tiktok: Option<String>,
+    pub username_twitter: Option<String>,
+    pub username_facebook: Option<String>,
+    pub username_linkedin: Option<String>,
+    pub username_pinterest: Option<String>,
+    pub username_youtube: Option<String>,
+    pub username_twitch: Option<String>,
+    pub username_reddit: Option<String>,
+    pub username_github: Option<String>,
+    pub username_vk: Option<String>,
+    pub username_weibo: Option<String>,
+    pub username_wechat: Option<String>,
+    pub username_etsy: Option<String>,
+    pub username_ebay: Option<String>,
+    pub username_discord: Option<String>,
+    pub email: Option<String>,
+    pub phone: Option<String>,
+    pub full_name: Option<String>,
+    pub biography: Option<String>,
+    pub external_url: Option<String>,
+    pub profile_pic_url: Option<String>,
+}
+```
+
+### `InstagramUser`
+
+The `InstagramUser` struct is used to create a new user in the database specifically for Instagram.
+
+```rust
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct InstagramUser {
+    pub username: String,
+    pub full_name: String,
+    pub biography: String,
+    pub external_url: Value,
+    pub profile_pic_url: String,
+    pub posts: u64,
+    pub followers: u64,
+    pub following: u64,
+    pub is_private: Option<bool>,
+    pub is_verified: Option<bool>,
+    pub is_business_account: Option<bool>,
+    pub status: Option<String>,
+}
+```
+
+### `Provider`
+
+The `Provider` enum defines the various data platforms supported by Dexter.
+
+```rust
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub enum Provider {
+    Piokok,
+    Instagram,
+    Snapchat,
+    TikTok,
+    Twitter,
+    Facebook,
+    LinkedIn,
+    Pinterest,
+    YouTube,
+    Twitch,
+    Reddit,
+    GitHub,
+    Vk,
+    Weibo,
+    WeChat,
+    Etsy,
+    Discord,
+    Vsco
+}
+```
+
+&#x20;Modules Links
+
+| a[pi](https://dexterlabs.cfd/docs/dexter_scraping/api/index.html "mod dexter_scraping::api")                         | API Module                                                                                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [builder](https://dexterlabs.cfd/docs/dexter_scraping/builder/index.html "mod dexter_scraping::builder")             | URL Builder Module                                                                                                                                                                                                      |
+| [connections](https://dexterlabs.cfd/docs/dexter_scraping/connections/index.html "mod dexter_scraping::connections") | Connections Module                                                                                                                                                                                                      |
+| [data](https://dexterlabs.cfd/docs/dexter_scraping/data/index.html "mod dexter_scraping::data")                      | Data controller module                                                                                                                                                                                                  |
+| [log](https://dexterlabs.cfd/docs/dexter_scraping/log/index.html "mod dexter_scraping::log")                         | Create User Module                                                                                                                                                                                                      |
+| [monitoring](https://dexterlabs.cfd/docs/dexter_scraping/monitoring/index.html "mod dexter_scraping::monitoring")    | Monitoring Module                                                                                                                                                                                                       |
+| [parser](https://dexterlabs.cfd/docs/dexter_scraping/parser/index.html "mod dexter_scraping::parser")                | This module provides various utilities for parsing and handling data. It includes submodules for URL handling and regex pattern matching.                                                                               |
+| [providers](https://dexterlabs.cfd/docs/dexter_scraping/providers/index.html "mod dexter_scraping::providers")       | This module contains the definitions and implementations for various social media providers. It includes functionality to convert providers to string representations and to get the column names for database storage. |
+| [proxy](https://dexterlabs.cfd/docs/dexter_scraping/proxy/index.html "mod dexter_scraping::proxy")                   | Proxy module                                                                                                                                                                                                            |
+| [request](https://dexterlabs.cfd/docs/dexter_scraping/request/index.html "mod dexter_scraping::request")             | Request builder                                                                                                                                                                                                         |
+| [returns](https://dexterlabs.cfd/docs/dexter_scraping/returns/index.html "mod dexter_scraping::returns")             | Returns Module                                                                                                                                                                                                          |
+| [user](https://dexterlabs.cfd/docs/dexter_scraping/user/index.html "mod dexter_scraping::user")                      | &#xA;User Module                                                                                                                                                                                                        |
+| [utils](https://dexterlabs.cfd/docs/dexter_scraping/utils/index.html "mod dexter_scraping::utils")                   | Utils Module                                                                                                                                                                                                            |
